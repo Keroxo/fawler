@@ -11,7 +11,7 @@ class Crawler {
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
 
 
-    String fetchSearchResults(String query) throws IOException {
+    String fetchGoogleSearchResult(String query) throws IOException {
         HttpURLConnection con = sendRequest(query);
         if (con.getResponseCode() == 200) {
             StringBuffer content = getResponseContent(con);
