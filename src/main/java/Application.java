@@ -5,11 +5,12 @@ public class Application {
 
     public static void main(String[] args) {
 
-        Crawler crawler = new Crawler();
+        Google google = new Google();
         ResultParser parser = new ResultParser();
+        String query = String.join(" ", args);
 
         try {
-            String resultPage = crawler.fetchGoogleSearchResult(String.join(" ", args));
+            String resultPage = google.search(query);
             List<String> resultLinks = parser.findResultUrls(resultPage);
 
             System.out.println(resultLinks);

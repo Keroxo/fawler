@@ -3,16 +3,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
-class Crawler {
+class Http {
 
-    private static final String GOOGLE_BASE_URL = "https://www.google.de/search?q=";
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
 
-
-    String fetchGoogleSearchResult(String query) throws IOException {
-        HttpURLConnection con = sendRequest(query);
+    String get(String url) throws IOException {
+        HttpURLConnection con = sendRequest(url);
         if (con.getResponseCode() == 200) {
             StringBuffer content = getResponseContent(con);
             return content.toString();
@@ -21,7 +18,7 @@ class Crawler {
     }
 
     private HttpURLConnection sendRequest(String query) throws IOException {
-        URL url = new URL(GOOGLE_BASE_URL + URLEncoder.encode(query, "UTF-8"));
+        URL url = new URL(query);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestMethod("GET");
