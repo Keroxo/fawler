@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class ResultParserTest {
+public class HtmlMatcherTest {
 
-    private ResultParser uut;
+    private HtmlMatcher uut;
 
     @Before
     public void init() {
-        uut = new ResultParser();
+        uut = new HtmlMatcher();
     }
 
     @Test
@@ -25,7 +25,7 @@ public class ResultParserTest {
         List<String> expected = Arrays.asList("http://sqlfiddle.com/", "https://context.reverso.net/%C3%BCbersetzung/englisch-deutsch/TEST+QUERY", "https://sqltest.net/", "https://www.testdome.com/tests/sql-online-test/12", "https://stackoverflow.com/questions/754527/best-way-to-test-sql-queries", "https://stackoverflow.com/questions/2433633/is-there-a-command-to-test-an-sql-query-without-executing-it-mysql-or-ansi-sq", "https://docs.oracle.com/cd/E13190_01/liquiddata/docs10/querybld/run.html", "https://package.elm-lang.org/packages/eeue56/elm-html-test/latest/Test-Html-Query", "https://www.ibm.com/support/knowledgecenter/en/SSMPHH_10.0.0/com.ibm.guardium.doc/assess/t_define_qbased.html");
 
         // When
-        List<String> actual = uut.findResultUrls(document);
+        List<String> actual = uut.findSearchResults(document);
 
         // Then
         Assert.assertEquals(expected, actual);
