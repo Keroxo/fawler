@@ -3,7 +3,7 @@ A web crawler that makes a google search and finds the used javascript framework
 
 ## Build
 
-###Windows
+### Windows
 ```
 $ gradlew.bat build
 ```
