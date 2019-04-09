@@ -15,5 +15,5 @@ $ ./gradle build
 
 ## Run
 ```
-$ java -jar build/libs/fawler-0.1.jar insert query params here
+$ java -jar build/libs/fawler-0.2-SNAPSHOT.jar insert query params here
 ```
