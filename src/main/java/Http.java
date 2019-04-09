@@ -10,7 +10,7 @@ class Http {
 
     String get(String url) throws IOException {
         HttpURLConnection con = sendRequest(url);
-        if (con.getResponseCode() == 200 || con.getResponseCode() == 302) {
+        if (con.getResponseCode() == 200 || con.getResponseCode() == 301 || con.getResponseCode() == 302) {
             StringBuffer content = getResponseContent(con);
             return content.toString();
         }
