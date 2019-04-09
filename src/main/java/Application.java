@@ -8,6 +8,7 @@ public class Application {
     private static Google google;
     private static HtmlMatcher matcher;
     private static Http http;
+    private static FrameworkNameReducer reducer;
 
     public static void main(String[] args) {
         init();
@@ -34,12 +35,14 @@ public class Application {
         google = new Google();
         matcher = new HtmlMatcher();
         http = new Http();
+        reducer = new FrameworkNameReducer();
     }
 
     private static void findAndAddFrameworks(Map<String, Integer> frameworks, String link) throws IOException {
         String pageContent = http.get(link);
         List<String> pageFrameworks = matcher.findFrameworks(pageContent);
         pageFrameworks.forEach(framework -> {
+            framework = reducer.reduce(framework);
             if (frameworks.containsKey(framework)) {
                 frameworks.put(framework, frameworks.get(framework) + 1);
             } else {
