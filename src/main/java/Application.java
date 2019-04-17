@@ -13,16 +13,11 @@ public class Application {
     public static void main(String[] args) {
         init();
         String query = String.join(" ", args);
-
+        System.out.println("Searching for Frameworks in this query:\n" + query);
         try {
-            String resultPage = google.search(query);
-            List<String> resultLinks = matcher.findSearchResults(resultPage);
 
-            Map<String, Integer> frameworks = new HashMap<>();
-
-            for (String link : resultLinks) {
-                findAndAddFrameworks(frameworks, link);
-            }
+            List<String> resultLinks = search(query);
+            Map<String, Integer> frameworks = findFrameworks(resultLinks);
             prettyPrintResult(frameworks);
 
         } catch (IOException e) {
@@ -36,6 +31,19 @@ public class Application {
         matcher = new HtmlMatcher();
         http = new Http();
         reducer = new FrameworkNameReducer();
+    }
+
+    private static List<String> search(String query) throws IOException {
+        String resultPage = google.search(query);
+        return matcher.findSearchResults(resultPage);
+    }
+
+    private static Map<String, Integer> findFrameworks(List<String> resultLinks) throws IOException {
+        Map<String, Integer> frameworks = new HashMap<>();
+        for (String link : resultLinks) {
+            findAndAddFrameworks(frameworks, link);
+        }
+        return frameworks;
     }
 
     private static void findAndAddFrameworks(Map<String, Integer> frameworks, String link) throws IOException {
